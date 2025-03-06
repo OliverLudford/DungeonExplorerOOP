@@ -8,13 +8,10 @@ namespace DungeonExplorer
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Game game = new Game();
-            game.Start();
-            Console.WriteLine("Waiting for your Implementation");
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
+            Game game = new Game(); // Creates the game
+            game.Start(); // Starts game loop
         }
     }
 }
