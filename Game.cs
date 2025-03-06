@@ -11,11 +11,12 @@ namespace DungeonExplorer
         public Game()
         {
             Console.WriteLine("Welcome to Dungeon Explorer");
-            Console.Write("\nPlease enter your character's name: ");
+            Console.WriteLine("\nPlease enter your character's name: ");
             string playerName = Console.ReadLine(); // Get user input for the players name
 
             player = new Player(playerName, 100);
-            currentRoom = new Room("You are stood in a dark room", new Item("Sword", 1, 40)); // Constructs player and room with an item
+            Item sword = new Item("Sword", "damaging", 10);
+            currentRoom = new Room("You are stood in a dark room", sword); // Constructs player and room with an item
         }
 
         public void Start()
@@ -27,7 +28,9 @@ namespace DungeonExplorer
                 Console.WriteLine("\nWhat would you like to do? (input 1-3)"); // gets player input
                 Console.WriteLine("\n1 = Look at the room");
                 Console.WriteLine("2 = Check Health and Inventory");
-                Console.WriteLine("3 = Quit game");
+                Console.WriteLine("3 = Pickup Item");
+                Console.WriteLine("4 = Quit game");
+
                 string playerAction = Console.ReadLine();
 
                 switch (playerAction)
@@ -41,9 +44,13 @@ namespace DungeonExplorer
                         Console.WriteLine($"Inventory: {player.InventoryContents()}");
                         break;
 
-                    case "3":
+                    case "4":
                         Console.WriteLine($"\nThank you for playing {player.Name}");
                         playing = false;
+                        break;
+
+                    case "3":
+                        player.PickUpItem(currentRoom);
                         break;
 
                     default:

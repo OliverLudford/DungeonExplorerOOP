@@ -15,7 +15,7 @@ namespace DungeonExplorer
 
         public string GetDescription()
         {
-            return description + ($"\nYou see a {roomItem.itemName} on the ground!");
+            return description + ($"\nYou see a {roomItem.itemName} damage {roomItem.itemDamage} on the ground!");
         }
     }
 }

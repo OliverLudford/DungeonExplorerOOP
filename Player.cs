@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace DungeonExplorer
 {
@@ -6,17 +7,25 @@ namespace DungeonExplorer
     {
         public string Name { get; private set; }
         public int Health { get; private set; }
-        private List<string> inventory = new List<string>();
+        private List<Item> inventory = new List<Item>();
 
         public Player(string name, int health) 
         {
             Name = name;
             Health = health;
         }
-        public void PickUpItem(string item)
-        {
 
+        public void PickUpItem(Room currentRoom)
+        {
+            if (currentRoom.roomItem != null)
+            {
+                inventory.Add(currentRoom.roomItem);
+                Console.WriteLine($"You picked up the {currentRoom.roomItem.itemName}!");
+            }
+            else 
+            { Console.WriteLine("There is no item in this room!"); }
         }
+
         public string InventoryContents()
         {
             int amountItems = inventory.Count; // Gets the amount of items in the inventory
@@ -25,7 +34,7 @@ namespace DungeonExplorer
                 return "You have nothing in your inventory";
                 }
 
-            return string.Join(", ", inventory);
+            return string.Join("\n", inventory);
         }
     }
 }
