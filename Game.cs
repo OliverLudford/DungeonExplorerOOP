@@ -15,7 +15,7 @@ namespace DungeonExplorer
             string playerName = Console.ReadLine(); // Get user input for the players name
 
             player = new Player(playerName, 100);
-            currentRoom = new Room("You are stood in a dark room that contains a small chest"); // Constructs player and room
+            currentRoom = new Room("You are stood in a dark room", new Item("Sword", 1, 40)); // Constructs player and room with an item
         }
 
         public void Start()
@@ -24,7 +24,7 @@ namespace DungeonExplorer
             bool playing = true;
             while (playing)
             {
-                Console.WriteLine("What would you like to do? (input 1-3)"); // gets player input
+                Console.WriteLine("\nWhat would you like to do? (input 1-3)"); // gets player input
                 Console.WriteLine("\n1 = Look at the room");
                 Console.WriteLine("2 = Check Health and Inventory");
                 Console.WriteLine("3 = Quit game");
