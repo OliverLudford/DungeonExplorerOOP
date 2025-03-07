@@ -26,10 +26,11 @@ namespace DungeonExplorer
             new Item("Longsword", "Damaging", 15)
         };
 
+        private static readonly Random rnd = new Random(); // Initializes the random function for use later
+
         // Method to get a random item
         public static Item GetRandomItem()
         {
-            Random rnd = new Random();
             int index = rnd.Next(itemList.Count); // Get a random item
             return itemList[index]; // Return the random item
         }

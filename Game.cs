@@ -16,7 +16,7 @@ namespace DungeonExplorer
 
             player = new Player(playerName, 100);
 
-            currentRoom = new Room("Starting Room", null);
+            currentRoom = new Room("Starting Room", null, null);
             currentRoom = Room.GetRandomRoom(); // Constructs a random room with an item
         }
 
