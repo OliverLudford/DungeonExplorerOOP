@@ -15,8 +15,9 @@ namespace DungeonExplorer
             string playerName = Console.ReadLine(); // Get user input for the players name
 
             player = new Player(playerName, 100);
-            Item sword = new Item("Sword", "damaging", 10);
-            currentRoom = new Room("You are stood in a dark room", Item.GetRandomItem()); // Constructs player and room with an item
+
+            currentRoom = new Room("Starting Room", null);
+            currentRoom = Room.GetRandomRoom(); // Constructs a random room with an item
         }
 
         public void Start()
@@ -36,7 +37,7 @@ namespace DungeonExplorer
                 switch (playerAction)
                 {
                     case "1":
-                        Console.WriteLine(currentRoom.GetDescription());
+                        Console.WriteLine(currentRoom.GetDescription(currentRoom));
                         break;
 
                     case "2":

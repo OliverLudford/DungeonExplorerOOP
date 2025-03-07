@@ -21,6 +21,7 @@ namespace DungeonExplorer
             {
                 inventory.Add(currentRoom.roomItem);
                 Console.WriteLine($"You picked up the {currentRoom.roomItem.itemName}!");
+                currentRoom.roomItem = null;
             }
             else 
             { Console.WriteLine("There is no item in this room!"); }

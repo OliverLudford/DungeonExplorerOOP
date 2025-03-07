@@ -17,21 +17,21 @@ namespace DungeonExplorer
         }
 
         // Predefined list of items to use when making rooms
-        private static readonly List<Item> Items = new List<Item>
+        private static readonly List<Item> itemList = new List<Item>
         {
             new Item("Sword", "Damaging", 10),
             new Item("Bow", "Damaging", 8),
-            new Item("Healing Potion", "Healing", 20),
+            new Item("Healing Potion", "Healing", 50),
             new Item("Dagger", "Damaging", 6),
-            new Item("Longsword", "Damaging", 16)
+            new Item("Longsword", "Damaging", 15)
         };
 
         // Method to get a random item
         public static Item GetRandomItem()
         {
             Random rnd = new Random();
-            int index = rnd.Next(Items.Count); // Get a random item
-            return Items[index]; // Return the random item
+            int index = rnd.Next(itemList.Count); // Get a random item
+            return itemList[index]; // Return the random item
         }
 
         // Override ToString for better inventory printing
