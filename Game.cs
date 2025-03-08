@@ -27,7 +27,7 @@ namespace DungeonExplorer
             while (playing)
             {
                 Console.WriteLine("----------------------------------------------");
-                Console.WriteLine("\nWhat would you like to do next? (input 1-3)"); // gets player input
+                Console.WriteLine("\nWhat would you like to do next? (input 1-5)"); // gets player input
                 Console.WriteLine("\n1 = Look at the room");
                 Console.WriteLine("2 = Check Health and Inventory");
                 Console.WriteLine("3 = Pickup Item");

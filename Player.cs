@@ -40,7 +40,15 @@ namespace DungeonExplorer
             string inventoryString = "";
             for (int i = 0; i < amountItems; i++)
             {
-                inventoryString = inventoryString + $"\n{i + 1}. {inventoryList[i]}";
+                if (inventoryList[i] == this.EquippedItem)
+                // If current item is equal to the equiped item add a unique string to the equipped item
+                {
+                    inventoryString = inventoryString + $"\nEquipped --> {i + 1}. {inventoryList[i]}";
+                }
+                else
+                {
+                    inventoryString = inventoryString + $"\n{i + 1}. {inventoryList[i]}";
+                }
             }
 
             return inventoryString;
