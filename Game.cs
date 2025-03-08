@@ -46,8 +46,15 @@ namespace DungeonExplorer
                     case "2":
                         Console.WriteLine($"Your Health is currently: {player.Health}");
                         Console.WriteLine($"\nInventory:\n{player.InventoryContents()}");
+                        Console.WriteLine($"\nWould you like to equip an item? (y/n)");
+                        
+                        string equipItem = Console.ReadLine();
+                        if (equipItem == "y")
+                        {
+                            player.EquipItem();
+                        }
                         break;
-                
+
                     case "3":
                         player.PickUpItem(currentRoom);
                         break;
