@@ -33,6 +33,7 @@ namespace DungeonExplorer
                 Console.WriteLine("3 = Pickup Item");
                 Console.WriteLine("4 = Move to the next area");
                 Console.WriteLine("5 = Quit game");
+                Console.WriteLine("6 = Attack");
 
                 string playerAction = Console.ReadLine();
                 Console.Clear(); // Clears existing text for better readablitiy
@@ -65,8 +66,13 @@ namespace DungeonExplorer
                         break;
 
                     case "5":
-                        Console.WriteLine($"\nThank you for playing {player.Name}"); // quits the game
+                        Console.WriteLine($"\nThank you for playing {player.Name}, press enter to quit"); // quits the game
+                        Console.ReadKey();
                         playing = false;
+                        break;
+
+                    case "6":
+                        player.Attack(currentRoom.roomEnemy);
                         break;
 
                     default:

@@ -6,8 +6,8 @@ namespace DungeonExplorer
     public class Enemy
     {
         public string enemyName;
-        private int enemyHealth;
-        private int enemyDamage;
+        public int enemyHealth;
+        public int enemyDamage;
 
         public Enemy(string enemyName, int enemyHealth, int enemyDamage) // Constructor
         {
