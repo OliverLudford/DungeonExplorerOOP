@@ -32,8 +32,8 @@ namespace DungeonExplorer
                 Console.WriteLine("2 = Check Health and Inventory");
                 Console.WriteLine("3 = Pickup Item");
                 Console.WriteLine("4 = Move to the next area");
-                Console.WriteLine("5 = Quit game");
-                Console.WriteLine("6 = Attack");
+                Console.WriteLine("5 = Attack Enemy");
+                Console.WriteLine("6 = Quit game");
 
                 string playerAction = Console.ReadLine();
                 Console.Clear(); // Clears existing text for better readablitiy
@@ -57,22 +57,32 @@ namespace DungeonExplorer
                         break;
 
                     case "3":
-                        player.PickUpItem(currentRoom);
+                        if (currentRoom.roomEnemy == null)
+                        {
+                            player.PickUpItem(currentRoom);
+                            break;
+                        }
+
+                        else
+                        {
+                            Console.WriteLine($"You must kill the {currentRoom.roomEnemy.enemyName} before you can get the item!");
+                        }
                         break;
+                        
 
                     case "4":
                         currentRoom = Room.GetRandomRoom(); // Constructs another random room, possibly with an item
                         Console.WriteLine(currentRoom.GetDescription(currentRoom)); // Prints the description for the new room
                         break;
 
-                    case "5":
+                    case "6":
                         Console.WriteLine($"\nThank you for playing {player.Name}, press enter to quit"); // quits the game
                         Console.ReadKey();
                         playing = false;
                         break;
 
-                    case "6":
-                        player.Attack(currentRoom.roomEnemy);
+                    case "5":
+                        player.Fight(currentRoom);
                         break;
 
                     default:

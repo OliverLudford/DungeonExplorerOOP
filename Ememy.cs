@@ -18,11 +18,11 @@ namespace DungeonExplorer
 
         private static readonly List<Enemy> enemyList = new List<Enemy> // List of available enemys
         {
-            new Enemy("Goblin", 50, 10),
-            new Enemy("Orc", 100, 15),     
-            new Enemy("Dragon", 500, 40),  
-            new Enemy("Troll", 200, 15),   
-            new Enemy("Vampire", 150, 15)
+            new Enemy("Goblin", 20, 5),
+            new Enemy("Orc", 40, 8),     
+            new Enemy("Dragon", 100, 12),  
+            new Enemy("Troll", 40, 6),   
+            new Enemy("Vampire", 60, 8)
         };
 
         private static readonly Random rnd = new Random();
