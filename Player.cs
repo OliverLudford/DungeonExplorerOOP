@@ -19,7 +19,7 @@ namespace DungeonExplorer
 
         public void PickUpItem(Room currentRoom)
         {
-            if (currentRoom.roomItem != null)
+            if (currentRoom.roomItem != null) // Checks to see if an item exists before allowing the player to pick it up
             {
                 inventoryList.Add(currentRoom.roomItem);
                 Console.WriteLine($"You picked up the {currentRoom.roomItem.itemName}!");
@@ -67,14 +67,15 @@ namespace DungeonExplorer
             string equipChoice = Console.ReadLine();
             if (Int32.TryParse(equipChoice, out int equipChoiceInt)) // Checks if equipChoice can be converted to an integer or not
             {
-                if (equipChoiceInt >= 1 && equipChoiceInt <= inventoryList.Count)
+                if (equipChoiceInt >= 1 && equipChoiceInt <= inventoryList.Count) 
+                // If equipChoiceInt is greater or equal to 1 and equipChoiceInt is bigger than the ammount of items in the inventory
                 {
-                    this.EquippedItem = inventoryList[equipChoiceInt - 1];
+                    this.EquippedItem = inventoryList[equipChoiceInt - 1]; // equipChoiceInt - 1 because indexing starts at 0
                     Console.WriteLine($"\nYou equipped the {this.EquippedItem.itemName}!");
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input!");
+                    Console.WriteLine("Invalid Input!"); // Handles invalid input
                 }
             }
             else
@@ -86,15 +87,15 @@ namespace DungeonExplorer
 
         public void Fight(Room currentRoom)
         {
-            if (currentRoom.roomEnemy == null)
+            if (currentRoom.roomEnemy == null) // Check for enemy in the room
             {
-                Console.WriteLine("There is no enemy to attack!"); // Check for enemy in the room
+                Console.WriteLine("There is no enemy to attack!");
                 return;
             }
 
             while (currentRoom.roomEnemy.enemyHealth > 0 && this.Health > 0) // Loops until one of the healths drop to zero
             {
-                Console.WriteLine($"Player Health: {this.Health}");
+                Console.WriteLine($"Player Health: {this.Health}"); // Informs the player of their health and the enemys health
                 Console.WriteLine($"{currentRoom.roomEnemy.enemyName} Health: {currentRoom.roomEnemy.enemyHealth}");
                 Console.WriteLine("\nWhat would you like to do? (enter 1-3): ");
                 Console.WriteLine("1 = Hit the enemy with the equipped item");
@@ -109,17 +110,17 @@ namespace DungeonExplorer
                     case "1":
                         int damage = EquippedItem.itemDamage; // Get player equipped weapon damage
                         Console.WriteLine($"You hit the {currentRoom.roomEnemy.enemyName} with {EquippedItem.itemName} for {damage} damage!");
-                        currentRoom.roomEnemy.enemyHealth = currentRoom.roomEnemy.enemyHealth - damage;
+                        currentRoom.roomEnemy.enemyHealth = currentRoom.roomEnemy.enemyHealth - damage; // Takes the damage away from the enemys health
                         
                         if (currentRoom.roomEnemy.enemyHealth <= 0) // Checks if the enemy is dead
                         {
                             Console.WriteLine($"You killed the {currentRoom.roomEnemy.enemyName}! \nYou can now take the loot!");
-                            currentRoom.roomEnemy = null;
+                            currentRoom.roomEnemy = null; // Removes the enemy from the room
                             return; // Exit combat
                         }
 
                         // Enemy attacks the player back
-                        this.Health = this.Health - currentRoom.roomEnemy.enemyDamage;
+                        this.Health = this.Health - currentRoom.roomEnemy.enemyDamage; // takes the enemys damage off the players health
                         Console.WriteLine($"\nThe {currentRoom.roomEnemy.enemyName} hit you back for {currentRoom.roomEnemy.enemyDamage} damage!");
                         Console.WriteLine("\n\nPress enter to move to the next turn!");
                         Console.ReadKey();

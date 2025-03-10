@@ -27,7 +27,7 @@ namespace DungeonExplorer
             while (playing)
             {
                 Console.WriteLine("----------------------------------------------");
-                Console.WriteLine("\nWhat would you like to do next? (input 1-5)"); // gets player input
+                Console.WriteLine("\nWhat would you like to do next? (input 1-5)");
                 Console.WriteLine("\n1 = Look at the room");
                 Console.WriteLine("2 = Check Health and Inventory");
                 Console.WriteLine("3 = Pickup Item");
@@ -35,7 +35,7 @@ namespace DungeonExplorer
                 Console.WriteLine("5 = Attack Enemy");
                 Console.WriteLine("6 = Quit game");
 
-                string playerAction = Console.ReadLine();
+                string playerAction = Console.ReadLine(); // gets player input
                 Console.Clear(); // Clears existing text for better readablitiy
 
                 switch (playerAction)
@@ -45,11 +45,11 @@ namespace DungeonExplorer
                         break;
 
                     case "2":
-                        Console.WriteLine($"Your Health is currently: {player.Health}");
+                        Console.WriteLine($"Your Health is currently: {player.Health}"); // Prints player health and inventory
                         Console.WriteLine($"\nInventory:\n{player.InventoryContents()}");
                         Console.WriteLine($"\nWould you like to equip an item? (y/n)");
                         
-                        string equipItem = Console.ReadLine();
+                        string equipItem = Console.ReadLine(); // asks the user if they want to equip an item from inventory
                         if (equipItem == "y")
                         {
                             player.EquipItem();
@@ -57,7 +57,7 @@ namespace DungeonExplorer
                         break;
 
                     case "3":
-                        if (currentRoom.roomEnemy == null)
+                        if (currentRoom.roomEnemy == null) // If there is no enemy guarding the item it lets the player pick it up
                         {
                             player.PickUpItem(currentRoom);
                             break;
@@ -76,17 +76,17 @@ namespace DungeonExplorer
                         break;
 
                     case "6":
-                        Console.WriteLine($"\nThank you for playing {player.Name}, press enter to quit"); // quits the game
-                        Console.ReadKey();
-                        playing = false;
+                        Console.WriteLine($"\nThank you for playing {player.Name}, press enter to quit");
+                        Console.ReadKey(); // waits for input before closing to give the user time to read
+                        playing = false; // breaks the playing loop and quits the game
                         break;
 
                     case "5":
-                        player.Fight(currentRoom);
+                        player.Fight(currentRoom); // calls the player.Fight() method with the currentRoom as input
                         break;
 
                     default:
-                        Console.WriteLine("\nPlease enter a valid input (1, 2 or 3)"); // Handles invalid inputs
+                        Console.WriteLine("\nPlease enter a valid input (1, 2 or 3)"); // Handles any invalid inputs
                         break;
                 }
             }

@@ -13,24 +13,24 @@ namespace DungeonExplorer
 
         public Room(string description, Item item = null, Enemy roomEnemy = null)
         {
-            this.description = description;
+            this.description = description; // Assigns the values to the room variables
             this.roomItem = item;
             this.roomEnemy = roomEnemy;
         }
 
-        private static readonly List<Room> roomList = new List<Room> // Lists of available dungeon "rooms" with different items and enemys.
+        private static readonly List<Room> roomList = new List<Room> // List of available rooms with different items and enemys.
         {
-            new Room("A dark cave", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
-            new Room("A mysterious forest", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
-            new Room("An abandoned temple", new Item("Ancient Sword", "Damaging", 25), null),
-            new Room("A small village", null, null),
-            new Room("A dungeon chamber", Item.GetRandomItem(), Enemy.GetRandomEnemy())
+            new Room("You are stood in a dark cave", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
+            new Room("You are in a mysterious forest", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
+            new Room("You are stood outside an abandoned temple", new Item("Ancient Sword", "Damaging", 25), null),
+            new Room("You are in a small village", null, null),
+            new Room("You are in a dark dungeon chamber", Item.GetRandomItem(), Enemy.GetRandomEnemy())
         };
 
         public static Room GetRandomRoom()
         {
-            Random rnd = new Random();
-            int index = rnd.Next(roomList.Count); // Get a random room
+            Random rnd = new Random(); //creates the random object
+            int index = rnd.Next(roomList.Count); // Get a random room from the room list
             return roomList[index]; // Return the random room
         }
 
@@ -48,7 +48,7 @@ namespace DungeonExplorer
                 roomDescription = roomDescription + ($"\nYou see a {roomItem.itemName} on the ground!");
             }
 
-            if (currentRoom.roomEnemy != null) // If there is an enemy in the room
+            if (currentRoom.roomEnemy != null) // If there is an enemy in the room adds on a description of the enemy
             {
                 roomDescription = roomDescription + ($"\nYou can see a {currentRoom.roomEnemy.enemyName} in the room!");
             }

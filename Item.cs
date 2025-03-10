@@ -21,9 +21,10 @@ namespace DungeonExplorer
         {
             new Item("Sword", "Damaging", 10),
             new Item("Bow", "Damaging", 8),
-            new Item("Healing Potion", "Healing", 50),
+            new Item("Crossbow", "Damaging", 15)
             new Item("Dagger", "Damaging", 6),
             new Item("Longsword", "Damaging", 15)
+            new Item("Magic Staff", "Damaging", 20)
         };
 
         private static readonly Random rnd = new Random(); // Initializes the random function for use later
@@ -38,7 +39,7 @@ namespace DungeonExplorer
         // Override ToString for better inventory printing
         public override string ToString()
         {
-            return ($"{this.itemName}, Type: {this.damageType}, Amount: {this.itemDamage}");
+            return ($"{this.itemName}, Type: {this.damageType}, Amount: {this.itemDamage}"); // returns the correct description
         }
     }
 }
