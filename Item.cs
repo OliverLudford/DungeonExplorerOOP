@@ -5,9 +5,9 @@ namespace DungeonExplorer
 {
     public class Item
     {
-        public string itemName;
-        public string damageType; // Either "Damaging" or "Healing"
-        public int itemDamage;
+        public string itemName { get; private set; }
+        public string damageType { get; private set; } // Either "Damaging" or "Healing"
+        public int itemDamage { get; private set; }
 
         public Item(string itemName, string damageType, int itemDamage)
         {

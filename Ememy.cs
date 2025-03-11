@@ -5,9 +5,9 @@ namespace DungeonExplorer
 {
     public class Enemy
     {
-        public string enemyName;
-        public int enemyHealth;
-        public int enemyDamage;
+        public string enemyName { get; private set; }
+        public int enemyHealth { get; set; }
+        public int enemyDamage { get; private set; }
 
         public Enemy(string enemyName, int enemyHealth, int enemyDamage) // Constructor
         {
