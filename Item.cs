@@ -21,9 +21,9 @@ namespace DungeonExplorer
         {
             new Item("Sword", "Damaging", 10),
             new Item("Bow", "Damaging", 8),
-            new Item("Crossbow", "Damaging", 15)
+            new Item("Crossbow", "Damaging", 15),
             new Item("Dagger", "Damaging", 6),
-            new Item("Longsword", "Damaging", 15)
+            new Item("Longsword", "Damaging", 15),
             new Item("Magic Staff", "Damaging", 20)
         };
 

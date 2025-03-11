@@ -23,8 +23,10 @@ namespace DungeonExplorer
             new Room("You are stood in a dark cave", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
             new Room("You are in a mysterious forest", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
             new Room("You are stood outside an abandoned temple", new Item("Ancient Sword", "Damaging", 25), null),
-            new Room("You are in a small village", null, null),
-            new Room("You are in a dark dungeon chamber", Item.GetRandomItem(), Enemy.GetRandomEnemy())
+            new Room("You are in a small village", Item.GetRandomItem(), null),
+            new Room("You are in a dark dungeon chamber", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
+            new Room("You are in a dimly lit dungeon", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
+            new Room("You are stood in a room with prison cells all around", Item.GetRandomItem(), Enemy.GetRandomEnemy()),
         };
 
         public static Room GetRandomRoom()

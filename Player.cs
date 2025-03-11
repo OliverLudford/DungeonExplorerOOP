@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Diagnostics;
 
 namespace DungeonExplorer
 {
@@ -116,6 +117,16 @@ namespace DungeonExplorer
                         {
                             Console.WriteLine($"You killed the {currentRoom.roomEnemy.enemyName}! \nYou can now take the loot!");
                             currentRoom.roomEnemy = null; // Removes the enemy from the room
+
+                            if (this.Health <= 0) // check if the player died
+                            {
+                                Console.Clear(); // clear console for readablity
+                                Console.WriteLine("\nYOU DIED.");
+                                Console.WriteLine($"\nThank you for playing {this.Name}, press enter to quit");
+                                Console.ReadKey();
+                                System.Environment.Exit(1); // quits the game
+                            }
+
                             return; // Exit combat
                         }
 

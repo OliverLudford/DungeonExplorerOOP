@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Media;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DungeonExplorer
 {
@@ -7,15 +9,29 @@ namespace DungeonExplorer
     {
         private Player player;
         private Room currentRoom;
+        public string playerName;
 
         public Game()
         {
             Console.WriteLine("Welcome to Dungeon Explorer");
-            Console.WriteLine("\nPlease enter your character's name: ");
-            string playerName = Console.ReadLine(); // Get user input for the players name
+
+            bool validInput = false;
+            while (!validInput == true)
+            {
+                Console.WriteLine("\nPlease enter your character's name: ");
+                string playerName = Console.ReadLine(); // Get user input for the players name
+                if (string.IsNullOrEmpty(playerName))
+                {
+                    Console.WriteLine("Invalid input, Please enter a name!");
+                }
+                else
+                {
+                    validInput = true;
+                }
+            }
 
             player = new Player(playerName, 100);
-
+            
             currentRoom = new Room("Starting Room", null, null);
             currentRoom = Room.GetRandomRoom(); // Constructs a random room with an item
         }
@@ -86,7 +102,7 @@ namespace DungeonExplorer
                         break;
 
                     default:
-                        Console.WriteLine("\nPlease enter a valid input (1, 2 or 3)"); // Handles any invalid inputs
+                        Console.WriteLine("\nPlease enter a valid input (1 - 6)"); // Handles any invalid inputs
                         break;
                 }
             }
