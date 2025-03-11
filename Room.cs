@@ -7,7 +7,7 @@ namespace DungeonExplorer
 {
     public class Room
     {
-        private string description { get; private set; }
+        private string description { get; set; }
         public Item roomItem { get; set; }
         public Enemy roomEnemy { get; set; }
 

@@ -7,7 +7,7 @@ namespace DungeonExplorer
 {
     internal class Game
     {
-        private Player player { get; private set; }
+        private Player player { get; set; }
         private Room currentRoom { get; set; }
         public string playerName { get; private set; }
 
