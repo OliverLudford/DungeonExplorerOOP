@@ -52,7 +52,7 @@ namespace DungeonExplorer
 
             if (currentRoom.roomEnemy != null) // If there is an enemy in the room adds on a description of the enemy
             {
-                roomDescription = roomDescription + ($"\nYou can see a {currentRoom.roomEnemy.enemyName} in the room!");
+                roomDescription = roomDescription + ($"\nYou can see a {currentRoom.roomEnemy.Name} in the room!");
             }
 
             return roomDescription;

@@ -3,18 +3,16 @@ using System.Collections.Generic;
 
 namespace DungeonExplorer
 {
-    public class Enemy
+    public class Enemy : Creature
     {
-        public string enemyName { get; private set; }
-        public int enemyHealth { get; set; }
         public int enemyDamage { get; private set; }
 
-        public Enemy(string enemyName, int enemyHealth, int enemyDamage) // Constructor
+        public Enemy(string name, int health, int damage)
+            : base(name, health)
         {
-            this.enemyName = enemyName;
-            this.enemyHealth = enemyHealth;
-            this.enemyDamage = enemyDamage;
+            this.enemyDamage = damage;
         }
+
 
         private static readonly List<Enemy> enemyList = new List<Enemy> // List of available enemys
         {

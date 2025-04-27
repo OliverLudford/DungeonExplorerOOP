@@ -81,7 +81,7 @@ namespace DungeonExplorer
 
                         else
                         {
-                            Console.WriteLine($"You must kill the {currentRoom.roomEnemy.enemyName} before you can get the item!");
+                            Console.WriteLine($"You must kill the {currentRoom.roomEnemy.Name} before you can get the item!");
                         }
                         break;
                         
