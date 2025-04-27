@@ -26,9 +26,13 @@ namespace DungeonExplorer
         private static readonly Random rnd = new Random();
 
         public static Enemy GetRandomEnemy()
-        {            
-            int index = rnd.Next(enemyList.Count); // Get a random emeny
-            return enemyList[index]; // Return the random enemy
+        {
+            int index = rnd.Next(enemyList.Count);
+            Enemy template = enemyList[index];
+
+            // Return a new enemy
+            return new Enemy(template.Name, template.Health, template.enemyDamage);
         }
+
     }
 }

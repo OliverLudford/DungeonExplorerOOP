@@ -31,9 +31,29 @@ namespace DungeonExplorer
 
         public static Room GetRandomRoom()
         {
-            Random rnd = new Random(); //creates the random object
-            int index = rnd.Next(roomList.Count); // Get a random room from the room list
-            return roomList[index]; // Return the random room
+            Random rnd = new Random();
+
+            // Pick a random room from the list
+            int index = rnd.Next(roomList.Count);
+            Room templateRoom = roomList[index];
+
+            // Create a new room
+            Item newItem = null;
+            if (templateRoom.roomItem != null)
+            {
+                // Gets a random item
+                newItem = Item.GetRandomItem();
+            }
+
+            Enemy newEnemy = null;
+            if (templateRoom.roomEnemy != null)
+            {
+                // Get a random enemy
+                newEnemy = Enemy.GetRandomEnemy();
+            }
+
+            // Return the randomly created room
+            return new Room(templateRoom.description, newItem, newEnemy);
         }
 
         public string GetDescription(Room currentRoom)

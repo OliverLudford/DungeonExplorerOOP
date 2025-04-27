@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace DungeonExplorer
 {
@@ -35,23 +36,26 @@ namespace DungeonExplorer
                 return "You have nothing in your inventory";
             }
 
+            // Sort the inventory by damage in descending order
+            var sortedInventory = inventoryList.OrderByDescending(item => item.itemDamage).ToList();
+
             string inventoryString = "";
-            for (int i = 0; i < amountItems; i++)
+            for (int i = 0; i < sortedInventory.Count; i++) // Use the sorted inventory list
             {
-                if (inventoryList[i] == this.EquippedItem)
-                // If current item is equal to the equiped item add a unique string to the equipped item
+                if (sortedInventory[i] == this.EquippedItem)
+                // If current item is equal to the equipped item add a unique string to the equipped item
                 {
-                    inventoryString = inventoryString + $"\nEquipped --> {i + 1}. {inventoryList[i]}";
+                    inventoryString = inventoryString + $"\nEquipped --> {i + 1}. {sortedInventory[i]}";
                 }
                 else
                 {
-                    inventoryString = inventoryString + $"\n{i + 1}. {inventoryList[i]}";
+                    inventoryString = inventoryString + $"\n{i + 1}. {sortedInventory[i]}";
                 }
             }
 
             return inventoryString;
-
         }
+
 
         public void EquipItem()
         {
@@ -60,15 +64,18 @@ namespace DungeonExplorer
                 Console.WriteLine("Your inventory is empty. There is nothing to equip.");
                 return;
             }
-            
+
+            // Sort the inventory by damage in descending order
+            var sortedInventory = inventoryList.OrderByDescending(item => item.itemDamage).ToList();
+
             Console.Write("\nEnter the number of the item you want to equip: ");
             string equipChoice = Console.ReadLine();
             if (Int32.TryParse(equipChoice, out int equipChoiceInt)) // Checks if equipChoice can be converted to an integer or not
             {
-                if (equipChoiceInt >= 1 && equipChoiceInt <= inventoryList.Count) 
+                if (equipChoiceInt >= 1 && equipChoiceInt <= sortedInventory.Count) 
                 // If equipChoiceInt is greater or equal to 1 and equipChoiceInt is bigger than the ammount of items in the inventory
                 {
-                    this.EquippedItem = inventoryList[equipChoiceInt - 1]; // equipChoiceInt - 1 because indexing starts at 0
+                    this.EquippedItem = sortedInventory[equipChoiceInt - 1]; // equipChoiceInt - 1 because indexing starts at 0
                     Console.WriteLine($"\nYou equipped the {this.EquippedItem.itemName}!");
                 }
                 else
