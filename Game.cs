@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Media;
 using System.Security.Cryptography.X509Certificates;
@@ -46,7 +47,7 @@ namespace DungeonExplorer
             bool playing = true;
             while (playing)
             {
-                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("\n----------------------------------------------");
                 Console.WriteLine("\nWhat would you like to do next? (input 1-5)");
                 Console.WriteLine("\n1 = Look at the room");
                 Console.WriteLine("2 = Check Health and Inventory");
@@ -91,10 +92,11 @@ namespace DungeonExplorer
 
 
                     case "4":
-                        Console.WriteLine("Which direction would you like to move? (l or r)");
+                        gameMap.ShowVisitedRooms(); // Show where the player is on the map and other rooms
+                        Console.WriteLine("\nWhich direction would you like to move? (l or r)");
                         string direction = Console.ReadLine();
+                        Console.Clear();
                         gameMap.MovePlayer(direction);
-
                         currentRoom = gameMap.GetCurrentRoom(); // Update the current room
                         break;
 

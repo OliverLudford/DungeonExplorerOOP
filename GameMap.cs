@@ -13,13 +13,38 @@ namespace DungeonExplorer
             dungeon = new List<Room>();
             playerPosition = 0; // Start at the first room
             
-            for (int i = 0; i < length; i++) // Add rooms the the dungeon list
+            for (int i = 0; i < length; i++) // Add rooms to the dungeon list
             {
                 dungeon.Add(Room.GetRandomRoom());
             }
         }
 
-        
+        public void ShowVisitedRooms()
+        {
+            Console.WriteLine("\nDungeon Map: (X = Current position, E = Enemy in room, V = Visited)");
+
+            for (int i = 0; i < dungeon.Count; i++)
+            {
+                if (i == playerPosition)
+                {
+                    Console.Write("[X]");
+                }
+
+                else if (dungeon[i].visited)
+                {
+                    if (dungeon[i].roomEnemy != null)
+                        Console.Write("[E]");
+                    else
+                        Console.Write("[V]");
+                }
+
+                else
+                {
+                    Console.Write("[ ]");
+                }
+            }
+        }
+
         public void MovePlayer(string direction) // Move the player left or right in the dungeon
         {
             switch (direction)
@@ -49,20 +74,21 @@ namespace DungeonExplorer
                     break;
 
                 default:
-                    Console.WriteLine("Invalid direction. Please type l or r");
+                    Console.WriteLine("Invalid direction. Please enter l or r");
                     break;
             }
 
             DisplayRoom(); // Show the new room description
         }
 
-        public void DisplayRoom() // Display the description of the current room
+        public void DisplayRoom()
         {
             Room currentRoom = dungeon[playerPosition];
+            currentRoom.visited = true; // mark as visited
             Console.WriteLine(currentRoom.GetDescription(currentRoom));
         }
-               
-        public Room GetCurrentRoom() // Return the current room
+
+        public Room GetCurrentRoom() // Gets the current room
         {
             return dungeon[playerPosition];
         }

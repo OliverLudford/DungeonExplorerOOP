@@ -10,14 +10,16 @@ namespace DungeonExplorer
         private string description { get; set; }
         public Item roomItem { get; set; }
         public Enemy roomEnemy { get; set; }
-
+        
         private static readonly Random rnd = new Random(); // Creates a random object for use later
+        public bool visited { get; set; } // Tracks if the room has been visited
 
         public Room(string description, Item item = null, Enemy roomEnemy = null)
         {
             this.description = description; // Assigns the values to the room variables
             this.roomItem = item;
             this.roomEnemy = roomEnemy;
+            this.visited = false;
         }
 
         private static readonly List<Room> roomList = new List<Room> // List of available rooms with different items and enemys.
