@@ -10,6 +10,7 @@ namespace DungeonExplorer
         private Player player { get; set; }
         private Room currentRoom { get; set; }
         public string playerName { get; private set; }
+        public GameMap gameMap { get; private set; }
 
         public Game()
         {
@@ -30,8 +31,11 @@ namespace DungeonExplorer
                 }
             }
 
+
             player = new Player(playerName, 100);
-            
+
+            gameMap = new GameMap(10);
+
             currentRoom = new Room("Starting Room", null, null);
             currentRoom = Room.GetRandomRoom(); // Constructs a random room with an item
         }
@@ -84,11 +88,14 @@ namespace DungeonExplorer
                             Console.WriteLine($"You must kill the {currentRoom.roomEnemy.Name} before you can get the item!");
                         }
                         break;
-                        
+
 
                     case "4":
-                        currentRoom = Room.GetRandomRoom(); // Constructs another random room, possibly with an item
-                        Console.WriteLine(currentRoom.GetDescription(currentRoom)); // Prints the description for the new room
+                        Console.WriteLine("Which direction would you like to move? (l or r)");
+                        string direction = Console.ReadLine();
+                        gameMap.MovePlayer(direction);
+
+                        currentRoom = gameMap.GetCurrentRoom(); // Update the current room
                         break;
 
                     case "6":

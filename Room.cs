@@ -11,6 +11,8 @@ namespace DungeonExplorer
         public Item roomItem { get; set; }
         public Enemy roomEnemy { get; set; }
 
+        private static readonly Random rnd = new Random(); // Creates a random object for use later
+
         public Room(string description, Item item = null, Enemy roomEnemy = null)
         {
             this.description = description; // Assigns the values to the room variables
@@ -31,8 +33,6 @@ namespace DungeonExplorer
 
         public static Room GetRandomRoom()
         {
-            Random rnd = new Random();
-
             // Pick a random room from the list
             int index = rnd.Next(roomList.Count);
             Room templateRoom = roomList[index];
