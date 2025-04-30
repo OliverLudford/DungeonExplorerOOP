@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Media;
 using System.Security.Cryptography.X509Certificates;
@@ -10,6 +11,7 @@ namespace DungeonExplorer
         private Player player { get; set; }
         private Room currentRoom { get; set; }
         public string playerName { get; private set; }
+        public GameMap gameMap { get; private set; }
 
         public Game()
         {
@@ -30,8 +32,11 @@ namespace DungeonExplorer
                 }
             }
 
+
             player = new Player(playerName, 100);
-            
+
+            gameMap = new GameMap(10);
+
             currentRoom = new Room("Starting Room", null, null);
             currentRoom = Room.GetRandomRoom(); // Constructs a random room with an item
         }
@@ -42,7 +47,7 @@ namespace DungeonExplorer
             bool playing = true;
             while (playing)
             {
-                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("\n----------------------------------------------");
                 Console.WriteLine("\nWhat would you like to do next? (input 1-5)");
                 Console.WriteLine("\n1 = Look at the room");
                 Console.WriteLine("2 = Check Health and Inventory");
@@ -81,14 +86,18 @@ namespace DungeonExplorer
 
                         else
                         {
-                            Console.WriteLine($"You must kill the {currentRoom.roomEnemy.enemyName} before you can get the item!");
+                            Console.WriteLine($"You must kill the {currentRoom.roomEnemy.Name} before you can get the item!");
                         }
                         break;
-                        
+
 
                     case "4":
-                        currentRoom = Room.GetRandomRoom(); // Constructs another random room, possibly with an item
-                        Console.WriteLine(currentRoom.GetDescription(currentRoom)); // Prints the description for the new room
+                        gameMap.ShowVisitedRooms(); // Show where the player is on the map and other rooms
+                        Console.WriteLine("\nWhich direction would you like to move? (l or r)");
+                        string direction = Console.ReadLine();
+                        Console.Clear();
+                        gameMap.MovePlayer(direction);
+                        currentRoom = gameMap.GetCurrentRoom(); // Update the current room
                         break;
 
                     case "6":

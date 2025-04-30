@@ -10,12 +10,16 @@ namespace DungeonExplorer
         private string description { get; set; }
         public Item roomItem { get; set; }
         public Enemy roomEnemy { get; set; }
+        
+        private static readonly Random rnd = new Random(); // Creates a random object for use later
+        public bool visited { get; set; } // Tracks if the room has been visited
 
         public Room(string description, Item item = null, Enemy roomEnemy = null)
         {
             this.description = description; // Assigns the values to the room variables
             this.roomItem = item;
             this.roomEnemy = roomEnemy;
+            this.visited = false;
         }
 
         private static readonly List<Room> roomList = new List<Room> // List of available rooms with different items and enemys.
@@ -31,9 +35,27 @@ namespace DungeonExplorer
 
         public static Room GetRandomRoom()
         {
-            Random rnd = new Random(); //creates the random object
-            int index = rnd.Next(roomList.Count); // Get a random room from the room list
-            return roomList[index]; // Return the random room
+            // Pick a random room from the list
+            int index = rnd.Next(roomList.Count);
+            Room templateRoom = roomList[index];
+
+            // Create a new room
+            Item newItem = null;
+            if (templateRoom.roomItem != null)
+            {
+                // Gets a random item
+                newItem = Item.GetRandomItem();
+            }
+
+            Enemy newEnemy = null;
+            if (templateRoom.roomEnemy != null)
+            {
+                // Get a random enemy
+                newEnemy = Enemy.GetRandomEnemy();
+            }
+
+            // Return the randomly created room
+            return new Room(templateRoom.description, newItem, newEnemy);
         }
 
         public string GetDescription(Room currentRoom)
@@ -52,7 +74,7 @@ namespace DungeonExplorer
 
             if (currentRoom.roomEnemy != null) // If there is an enemy in the room adds on a description of the enemy
             {
-                roomDescription = roomDescription + ($"\nYou can see a {currentRoom.roomEnemy.enemyName} in the room!");
+                roomDescription = roomDescription + ($"\nYou can see a {currentRoom.roomEnemy.Name} in the room!");
             }
 
             return roomDescription;
