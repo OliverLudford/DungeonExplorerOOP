@@ -68,19 +68,25 @@ namespace DungeonExplorer
             // Sort the inventory by damage in descending order
             var sortedInventory = inventoryList.OrderByDescending(item => item.itemDamage).ToList();
 
-            Console.Write("\nEnter the number of the item you want to equip: ");
+            Console.Write("\nEnter the number of the item you want to equip: (If a potion is selected it will be used instead)");
             string equipChoice = Console.ReadLine();
+
             if (Int32.TryParse(equipChoice, out int equipChoiceInt)) // Checks if equipChoice can be converted to an integer or not
             {
-                if (equipChoiceInt >= 1 && equipChoiceInt <= sortedInventory.Count) 
-                // If equipChoiceInt is greater or equal to 1 and equipChoiceInt is bigger than the ammount of items in the inventory
+                if (equipChoiceInt >= 1 && equipChoiceInt <= sortedInventory.Count)
                 {
-                    this.EquippedItem = sortedInventory[equipChoiceInt - 1]; // equipChoiceInt - 1 because indexing starts at 0
-                    Console.WriteLine($"\nYou equipped the {this.EquippedItem.itemName}!");
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input!"); // Handles invalid input
+                    Item selectedItem = sortedInventory[equipChoiceInt - 1]; // Get the selected item
+
+                    if (selectedItem is Potion potion) // Uses the potion
+                    {
+                        potion.UsePotion(this); // Heals the player
+                        inventoryList.Remove(potion); // Removes the potion
+                    }
+                    else
+                    {
+                        this.EquippedItem = selectedItem; // Equip the item
+                        Console.WriteLine($"\nYou equipped the {this.EquippedItem.itemName}!");
+                    }
                 }
             }
             else

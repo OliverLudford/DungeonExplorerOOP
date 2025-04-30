@@ -84,7 +84,7 @@ namespace DungeonExplorer
         public void DisplayRoom()
         {
             Room currentRoom = dungeon[playerPosition];
-            currentRoom.visited = true; // mark as visited
+            currentRoom.visited = true; // Mark as visited
             Console.WriteLine(currentRoom.GetDescription(currentRoom));
         }
 
