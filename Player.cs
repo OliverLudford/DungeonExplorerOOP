@@ -8,7 +8,7 @@ namespace DungeonExplorer
     public class Player : Creature
     {
         private List<Item> inventoryList = new List<Item>();
-        public Item EquippedItem { get; private set; }
+        public Item EquippedItem { get; set; }
 
         public Player(string name, int health, Item equippedItem = null) 
             : base(name, health)
@@ -75,17 +75,11 @@ namespace DungeonExplorer
             {
                 if (equipChoiceInt >= 1 && equipChoiceInt <= sortedInventory.Count)
                 {
-                    Item selectedItem = sortedInventory[equipChoiceInt - 1]; // Get the selected item
+                    ICollectable selectedItem = sortedInventory[equipChoiceInt - 1] as ICollectable; // Get the selected item
 
-                    if (selectedItem is Potion potion) // Uses the potion
+                    if (selectedItem != null)
                     {
-                        potion.UsePotion(this); // Heals the player
-                        inventoryList.Remove(potion); // Removes the potion
-                    }
-                    else
-                    {
-                        this.EquippedItem = selectedItem; // Equip the item
-                        Console.WriteLine($"\nYou equipped the {this.EquippedItem.itemName}!");
+                        selectedItem.Equip(this, sortedInventory); // Polymorphic as weapons and potions act differently
                     }
                 }
             }
@@ -125,16 +119,12 @@ namespace DungeonExplorer
                         
                         if (currentRoom.roomEnemy.Health <= 0) // Checks if the enemy is dead
                         {
-                            Console.WriteLine($"You killed the {currentRoom.roomEnemy.Name}! \nYou can now take the loot!");
+                            currentRoom.roomEnemy.OnDeath();
                             currentRoom.roomEnemy = null; // Removes the enemy from the room
 
                             if (this.Health <= 0) // check if the player died
                             {
-                                Console.Clear(); // clear console for readablity
-                                Console.WriteLine("\nYOU DIED.");
-                                Console.WriteLine($"\nThank you for playing {this.Name}, press enter to quit");
-                                Console.ReadKey();
-                                System.Environment.Exit(1); // quits the game
+                                this.OnDeath();
                             }
 
                             return; // Exit combat
@@ -167,20 +157,23 @@ namespace DungeonExplorer
                     default:
                         Console.WriteLine("Invalid input."); // default case to handle bad input
                         break;
-
-                }
-                
+                }                
             }
 
             if (this.Health <= 0) // check if the player died
             {
-                Console.Clear(); // clear console for readablity
-                Console.WriteLine("\nYOU DIED.");
-                Console.WriteLine($"\nThank you for playing {this.Name}, press enter to quit");
-                Console.ReadKey();
-                System.Environment.Exit(1); // quits the game
+                this.OnDeath();
             }
 
+        }
+
+        public override void OnDeath()
+        {
+            Console.Clear(); // Clear console for readablity
+            Console.WriteLine("\nYOU DIED.");
+            Console.WriteLine($"\nThank you for playing {this.Name}, press enter to quit");
+            Console.ReadKey();
+            System.Environment.Exit(1); // Quits the game
         }
     }
 }

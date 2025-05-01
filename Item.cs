@@ -4,6 +4,11 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace DungeonExplorer
 {
+    public interface ICollectable
+    {
+        void Equip(Player player, List<Item> inventory);
+    }
+
     public class Item
     {
         public string itemName { get; private set; }
@@ -43,15 +48,20 @@ namespace DungeonExplorer
             return ($"{this.itemName}, Type: {this.damageType}, Amount: {this.itemDamage}"); // returns the correct description
         }
     }
-    public class Weapon : Item
+    public class Weapon : Item, ICollectable
     {
         public Weapon(string name, int damage)
             : base(name, "Damaging", damage) // Weapons deal damage
         {
         }
+        public void Equip(Player player, List<Item> inventory)
+        {
+            player.EquippedItem = this;
+            Console.WriteLine($"\nYou equipped the {this.itemName}!");
+        }
     }
 
-    public class Potion : Item
+    public class Potion : Item, ICollectable
     {
         public Potion(string name, int healAmount)
             : base(name, "Healing", healAmount) // Potions heal
@@ -64,8 +74,12 @@ namespace DungeonExplorer
             if (player.Health > 100) // Check that the health isnt greater than 100
                 player.Health = 100;
 
-            Console.WriteLine($"{player.Name} used {this.itemName} and healed {this.itemDamage} health!");
+            Console.WriteLine($"You used {this.itemName} and healed {this.itemDamage} health");
         }
-
+        public void Equip(Player player, List<Item> inventory)
+        {
+            this.UsePotion(player);
+            inventory.Remove(this);
+        }
     }
 }

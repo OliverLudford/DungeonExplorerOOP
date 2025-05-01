@@ -36,14 +36,12 @@ namespace DungeonExplorer
             player = new Player(playerName, 100);
 
             gameMap = new GameMap(10);
-
-            currentRoom = new Room("Starting Room", null, null);
-            currentRoom = Room.GetRandomRoom(); // Constructs a random room with an item
+            currentRoom = gameMap.GetCurrentRoom();
         }
 
         public void Start()
         {
-            Console.WriteLine($"\nWelcome {player.Name}");
+            Console.WriteLine($"\nWelcome {player.Name}, Kill the dragon in the last room to win!");
             bool playing = true;
             while (playing)
             {
