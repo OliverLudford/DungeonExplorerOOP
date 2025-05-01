@@ -119,12 +119,12 @@ namespace DungeonExplorer
                         
                         if (currentRoom.roomEnemy.Health <= 0) // Checks if the enemy is dead
                         {
-                            currentRoom.roomEnemy.OnDeath();
+                            currentRoom.roomEnemy.OnDeath(this);
                             currentRoom.roomEnemy = null; // Removes the enemy from the room
 
                             if (this.Health <= 0) // check if the player died
                             {
-                                this.OnDeath();
+                                this.OnDeath(this);
                             }
 
                             return; // Exit combat
@@ -162,12 +162,12 @@ namespace DungeonExplorer
 
             if (this.Health <= 0) // check if the player died
             {
-                this.OnDeath();
+                this.OnDeath(this);
             }
 
         }
 
-        public override void OnDeath()
+        public override void OnDeath(Player player)
         {
             Console.Clear(); // Clear console for readablity
             Console.WriteLine("\nYOU DIED.");

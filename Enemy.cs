@@ -18,9 +18,9 @@ namespace DungeonExplorer
         {
             new Enemy("Goblin", 20, 6),
             new Enemy("Orc", 40, 10),
-            new Enemy("Troll", 40, 8),   
+            new Enemy("Troll", 40, 8),
             new Enemy("Vampire", 60, 10),
-            new Enemy("Spider", 20, 8),
+            new Spider(),
             new Enemy("Bandit", 30, 10)
         };
 
@@ -34,7 +34,7 @@ namespace DungeonExplorer
             // Return a new enemy
             return new Enemy(template.Name, template.Health, template.enemyDamage);
         }
-        public override void OnDeath()
+        public override void OnDeath(Player player)
         {
             Console.WriteLine($"You killed the {this.Name}!");
         }
@@ -43,7 +43,7 @@ namespace DungeonExplorer
     {
         public Dragon() : base("Dragon", 100, 15) { }
 
-        public override void OnDeath() // When the dragon is killed it completes the game and the player wins.
+        public override void OnDeath(Player player) // When the dragon is killed it completes the game and the player wins.
         {
             Console.WriteLine("You have killed the Dragon!");
             Console.WriteLine("YOU WIN!");
@@ -52,4 +52,21 @@ namespace DungeonExplorer
             Environment.Exit(0);
         }
     }
+
+    public class Spider : Enemy
+    {
+        public Spider() : base("Spider", 20, 8) { }
+        public override void OnDeath(Player player)
+        {
+            Console.WriteLine("You killed the Spider!");
+            Console.WriteLine("But it poisoned you as it died! You took 10 poison damage.");
+            player.Health -= 10;
+
+            if (player.Health <= 0)
+            {
+                player.OnDeath(player);
+            }
+        }
+    }
+
 }
