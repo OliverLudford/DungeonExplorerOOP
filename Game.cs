@@ -10,7 +10,8 @@ namespace DungeonExplorer
     {
         private Player player { get; set; }
         private Room currentRoom { get; set; }
-        public string playerName { get; private set; }
+
+        public string playerName;
         public GameMap gameMap { get; private set; }
 
         public Game()
