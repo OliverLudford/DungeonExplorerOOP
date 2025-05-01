@@ -17,10 +17,11 @@ namespace DungeonExplorer
         private static readonly List<Enemy> enemyList = new List<Enemy> // List of available enemys
         {
             new Enemy("Goblin", 20, 5),
-            new Enemy("Orc", 40, 8),     
-            new Enemy("Dragon", 100, 12),  
+            new Enemy("Orc", 40, 8),
             new Enemy("Troll", 40, 6),   
-            new Enemy("Vampire", 60, 8)
+            new Enemy("Vampire", 60, 8),
+            new Enemy("Spider", 15, 2),
+            new Enemy("Bandit", 30, 10)
         };
 
         private static readonly Random rnd = new Random();
@@ -33,6 +34,22 @@ namespace DungeonExplorer
             // Return a new enemy
             return new Enemy(template.Name, template.Health, template.enemyDamage);
         }
+        public override void OnDeath()
+        {
+            Console.WriteLine($"You killed the {this.Name}!");
+        }
+    }
+    public class Dragon : Enemy
+    {
+        public Dragon() : base("Dragon", 100, 15) { }
 
+        public override void OnDeath() // When the dragon is killed it completes the game and the player wins.
+        {
+            Console.WriteLine("You have killed the Dragon!");
+            Console.WriteLine("YOU WIN!");
+            Console.WriteLine("\nPress enter to exit");
+            Console.ReadKey();
+            Environment.Exit(0);
+        }
     }
 }

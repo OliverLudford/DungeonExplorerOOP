@@ -12,5 +12,7 @@ namespace DungeonExplorer
             Name = name;
             Health = health;
         }
+
+        public abstract void OnDeath(); // Enforces that all classes impliment the method
     }
 }

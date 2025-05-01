@@ -13,21 +13,30 @@ namespace DungeonExplorer
             dungeon = new List<Room>();
             playerPosition = 0; // Start at the first room
             
-            for (int i = 0; i < length; i++) // Add rooms to the dungeon list
+            for (int i = 0; i < length - 1; i++) // Add rooms to the dungeon list
             {
                 dungeon.Add(Room.GetRandomRoom());
             }
+
+            Room finalRoom = Room.GetRandomRoom();
+            finalRoom.roomEnemy = new Dragon(); // Makes the last room always contain the dragon
+            dungeon.Add(finalRoom); 
         }
 
         public void ShowVisitedRooms()
         {
-            Console.WriteLine("\nDungeon Map: (X = Current position, E = Enemy in room, V = Visited)");
+            Console.WriteLine("\nDungeon Map: (X = Current position, E = Enemy in room, V = Visited, D = Dragon)");
 
             for (int i = 0; i < dungeon.Count; i++)
             {
                 if (i == playerPosition)
                 {
                     Console.Write("[X]");
+                }
+
+                else if (dungeon[i].roomEnemy != null && dungeon[i].roomEnemy.Name == "Dragon") // Checks for the dragon
+                {
+                    Console.Write("[D]");
                 }
 
                 else if (dungeon[i].visited)
